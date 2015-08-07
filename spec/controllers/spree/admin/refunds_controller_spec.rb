@@ -20,7 +20,6 @@ RSpec.describe Spree::Admin::RefundsController do
         order_id: payment.order.to_param,
         payment_id: payment.to_param
 
-      expect(payload).not_to be_nil
       expect(payload[:refund]).to eq Spree::Refund.last
     end
   end

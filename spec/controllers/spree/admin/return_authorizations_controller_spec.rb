@@ -31,7 +31,6 @@ RSpec.describe Spree::Admin::ReturnAuthorizationsController do
           }
         }
 
-      expect(payload).not_to be_nil
       expect(payload[:return_authorization]).
         to eq Spree::ReturnAuthorization.last
     end

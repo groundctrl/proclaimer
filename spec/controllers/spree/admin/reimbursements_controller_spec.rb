@@ -20,8 +20,6 @@ RSpec.describe Spree::Admin::ReimbursementsController do
         order_id: order.to_param,
         build_from_customer_return_id: customer_return.id
 
-
-      expect(payload).not_to be_nil
       expect(payload[:reimbursement]).to eq Spree::Reimbursement.first
     end
   end

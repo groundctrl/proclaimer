@@ -35,7 +35,6 @@ RSpec.describe Spree::Admin::CustomerReturnsController do
           }
         }
 
-      expect(payload).not_to be_nil
       expect(payload[:customer_return]).to eq Spree::CustomerReturn.last
     end
   end
