@@ -10,7 +10,7 @@ RSpec.describe Spree::Admin::RefundsController do
     it "sends a notification with refund as a payload" do
       payload = nil
 
-      ActiveSupport::Notifications.subscribe("spree.refunds.create") do |*args|
+      ActiveSupport::Notifications.subscribe("spree.refund.create") do |*args|
         payload = args.last
       end
 
