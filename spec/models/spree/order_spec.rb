@@ -1,7 +1,7 @@
 require "spec_helper"
 
 RSpec.describe Spree::Order do
-  EMPTY_PAYLOAD = Object.new
+  before { stub_const("EMPTY_PAYLOAD", Object.new) }
 
   context "when order is first created" do
     it "does not instrument any order event" do
