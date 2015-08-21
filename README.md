@@ -19,6 +19,30 @@ bundle
 bundle exec rails g proclaimer:install
 ```
 
+Usage
+-----
+
+Use `Proclaimer.configure` block to setup subscription:
+
+```ruby
+Proclaimer.configure do |config|
+  # Subscribe to a particular event
+  config.subscribe("order.complete") do |event, payload|
+    # ...
+  end
+
+  # Subscribe to any events related to order
+  config.subscribe("order") do |event, payload|
+    # ...
+  end
+
+  # Subscribe to any Spree events
+  config.subscribe_all do |event, payload|
+    # ...
+  end
+end
+```
+
 Testing
 -------
 
