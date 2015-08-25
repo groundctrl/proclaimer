@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = s.summary
   s.required_ruby_version = ">= 2.2.0"
 
-  s.authors = ["Vincent Franco", "David Freerksen"]
+  s.authors = ["Prem Sichanugrist", "Vincent Franco", "David Freerksen"]
   s.homepage  = "https://github.com/groundctrl/proclaimer"
 
   s.files = `git ls-files`.split("\n")
