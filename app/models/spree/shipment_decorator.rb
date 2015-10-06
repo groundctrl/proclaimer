@@ -4,9 +4,13 @@ module Spree
     state_machine.after_transition to: :ready, do: :notify_shipment_ready
     state_machine.after_transition to: :canceled, do: :notify_shipment_canceled
 
+    def broadcast_state
+      notification_event(state)
+    end
+
     private
 
-    %i(pending ready canceled).each do |type|
+    %i(pending resume ready canceled).each do |type|
       define_method(:"notify_shipment_#{type}") { notification_event type }
     end
 
