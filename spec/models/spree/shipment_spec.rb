@@ -17,40 +17,42 @@ RSpec.describe Spree::Shipment do
   end
 
   context "when shipment is ready" do
-    let(:shipment) { create(:shipment) }
-
-    before do
-      allow(shipment).to receive(:determine_state) { 'ready' }
-    end
-
     it "instruments shipment.ready event" do
-      payload = nil
+      shipment = create(:shipment)
+      allow(shipment).to receive(:determine_state) { 'ready' }
+      allow(ActiveSupport::Notifications).to receive(:instrument)
 
-      ActiveSupport::Notifications.subscribed(
-        -> (*args) { payload = args.last },
-        "spree.shipment.ready"
-      ) do
-        shipment.ready
+      shipment.ready
 
-        expect(payload[:shipment]).to eq shipment
-      end
+      expect(ActiveSupport::Notifications).
+        to have_received(:instrument).
+        with("spree.shipment.ready", shipment: shipment)
     end
   end
 
   context "when shipment is canceled" do
-    let(:shipment) { create(:shipment) }
-
     it "instruments shipment.canceled event" do
-      payload = nil
+      shipment = create(:shipment)
+      allow(ActiveSupport::Notifications).to receive(:instrument)
 
-      ActiveSupport::Notifications.subscribed(
-        -> (*args) { payload = args.last },
-        "spree.shipment.canceled"
-      ) do
-        shipment.cancel
+      shipment.cancel
 
-        expect(payload[:shipment]).to eq shipment
-      end
+      expect(ActiveSupport::Notifications).
+        to have_received(:instrument).
+        with("spree.shipment.canceled", shipment: shipment)
+    end
+  end
+
+  describe "#broadcast_state" do
+    it "instruments shipment.STATE event" do
+      shipment = build(:shipment, state: 'pending')
+      allow(ActiveSupport::Notifications).to receive(:instrument)
+
+      shipment.broadcast_state
+
+      expect(ActiveSupport::Notifications).
+        to have_received(:instrument).
+        with("spree.shipment.pending", shipment: shipment)
     end
   end
 end
