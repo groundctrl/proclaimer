@@ -6,8 +6,8 @@ module Spree
     describe "#update_shipments_with_status_tracking" do
       it "calls shipment#broadcast on shipments that have changed state" do
         fake_shipments = [
-          fake_shipment_with_state('pending', 'ready'),
-          fake_shipment_with_state('pending')
+          fake_shipment_with_state("pending", "ready"),
+          fake_shipment_with_state("pending")
         ]
         fake_order = double(Order, shipments: fake_shipments)
         updater = described_class.new(fake_order)
