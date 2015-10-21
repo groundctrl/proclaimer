@@ -2,15 +2,13 @@ require "spec_helper"
 
 module Spree
   RSpec.describe User, type: :model do
-    before { stub_const("EMPTY_PAYLOAD", Object.new) }
-
     context "when user is created" do
-      it "instruments user.create event" do
-        payload = EMPTY_PAYLOAD
+      it "instruments user.created event" do
+        payload = nil
 
         ActiveSupport::Notifications.subscribed(
           -> (*args) { payload = args.last },
-          "spree.user.create"
+          "spree.user.created"
         ) do
           user = create(:user)
 
@@ -20,17 +18,17 @@ module Spree
     end
 
     context "when user is updated" do
-      it "does not instrument any user event" do
-        payload = EMPTY_PAYLOAD
+      it "instruments user.updated event" do
+        payload = nil
         user = create(:user)
 
         ActiveSupport::Notifications.subscribed(
           -> (*args) { payload = args.last },
-          /^spree\.user/
+          "spree.user.updated"
         ) do
           user.save!
 
-          expect(payload).to eq EMPTY_PAYLOAD
+          expect(payload[:user]).to eq user
         end
       end
     end
