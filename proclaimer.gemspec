@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.summary = "An easy, and extensible transactional event notification " +
     "add on for Spree."
   s.description = s.summary
-  s.required_ruby_version = ">= 2.2.0"
+  s.required_ruby_version = ">= 2.1.0"
 
   s.authors = ["Prem Sichanugrist", "Vincent Franco", "David Freerksen"]
   s.homepage  = "https://github.com/groundctrl/proclaimer"
