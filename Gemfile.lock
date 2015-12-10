@@ -74,7 +74,7 @@ GIT
 PATH
   remote: .
   specs:
-    proclaimer (0.3.0)
+    proclaimer (0.3.1)
       spree_backend (~> 3.0.0)
 
 GEM
@@ -374,3 +374,6 @@ DEPENDENCIES
   spree!
   spree_auth_devise!
   sqlite3
+
+BUNDLED WITH
+   1.10.6
